@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Blog del chico virga</title>
+	</head>
+	<body>
+		<div>
+			<h1><strong>Blog de Mister Phillips</strong></h1>
+		</div>
+		
+		{% for publicacion in publicaciones %}
+		<div>
+			<p> publicado: {{ publicacion.fecha_publicacion }}</p>
+			<h2><a href="">{{ publicacion.titulo }}</a></h2>
+			<p>{{ publicacion.texto|linebreaksbr }}</p>
+			<hr>
+		</div>
+		{% endfor %}
+
+
+		<div>
+			<h1><a href= "www.pornhub.com">Premio Rico al que Clickee esto ;) </a></h1>
+		</div>
+		
+
+	</body>
+</html>
