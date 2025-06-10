@@ -14,3 +14,14 @@ class Publicacion(models.Model):
         self.save()
     def __str__(self):
         return self.titulo
+    
+class ObraArte (models.Model):
+    titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    fecha_creacion = models.DateField()
+    imagen = models.ImageField(upload_to="imagenes/", blank=True, null=True)
+    
+    def __str__(self):
+        return self.titulo
