@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Publicacion
 from .models import Publicacion, ObraArte
 
 admin.site.register(Publicacion)

@@ -1,26 +1,110 @@
 <html>
-	<head>
-		<title>Blog del chico virga</title>
-	</head>
-	<body>
-		<div>
-			<h1><strong>Blog de Mister Phillips</strong></h1>
-		</div>
-		
-		{% for publicacion in publicaciones %}
-		<div>
-			<p> publicado: {{ publicacion.fecha_publicacion }}</p>
-			<h2><a href="">{{ publicacion.titulo }}</a></h2>
-			<p>{{ publicacion.texto|linebreaksbr }}</p>
-			<hr>
-		</div>
-		{% endfor %}
+<head>
+    <title>Blog + Galería de Arte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
+        .galeria {
+            background-color: #f0f0d6;
+            padding: 20px;
+            border-radius: 8px;
+        }
 
-		<div>
-			<h1><a href= "www.pornhub.com">Premio Rico al que Clickee esto ;) </a></h1>
-		</div>
-		
+        .galeria-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-	</body>
+        .galeria-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .obra {
+            position: relative;
+            width: 30%;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .obra img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .obra:hover img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 14px;
+        }
+
+        .obra:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h2 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .overlay p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sección Blog -->
+    <h1>Blog de Mister Phillips</h1>
+    {% for publicacion in publicaciones %}
+        <div>
+            <h2>{{ publicacion.titulo }}</h2>
+            <p>Publicado: {{ publicacion.fecha_publicacion }}</p>
+            <p>{{ publicacion.texto|linebreaksbr }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+
+    <!-- Sección Galería de Arte -->
+    <div class="galeria">
+        <div class="galeria-title">Galería de Arte</div>
+        <div class="galeria-grid">
+            {% for obra in obras %}
+                <div class="obra">
+                    {% if obra.imagen %}
+                        <img src="{{ obra.imagen.url }}" alt="{{ obra.titulo }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200.png?text=Sin+imagen" alt="Sin imagen">
+                    {% endif %}
+                    <div class="overlay">
+                        <h2>{{ obra.titulo }}</h2>
+                        <p>Autor: {{ obra.autor }}</p>
+                        <p>{{ obra.descripcion }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
 </html>
