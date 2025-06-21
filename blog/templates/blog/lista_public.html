@@ -1,43 +1,95 @@
 <html>
 <head>
-    <title>Blog y Galería de Arte</title>
+    <title>Blog y Galería</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
         }
 
-        .galeria {
-            background-color: #f0f0d6;
+        header {
+            background-color: #3f51b5;
+            color: white;
             padding: 20px;
-            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contenido {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* BLOG */
+        .blog-section h1 {
+            color: #333;
+            font-size: 28px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 25px;
+        }
+
+        .publicacion {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .publicacion:hover {
+            transform: translateY(-3px);
+        }
+
+        .publicacion h2 {
+            margin-top: 0;
+            color: #3f51b5;
+        }
+
+        .publicacion .fecha {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        /* GALERÍA */
+        .galeria {
+            background-color: #f5f5dc;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-top: 50px;
         }
 
         .galeria-title {
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .galeria-grid {
             display: flex;
             flex-wrap: wrap;
+            gap: 20px;
             justify-content: space-between;
         }
 
         .obra {
             position: relative;
             width: 30%;
-            margin-bottom: 20px;
-            overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            background-color: white;
         }
 
         .obra img {
-            width: 350px;
-            height: 500px;
-	    Object-fit: Cover;
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
         }
@@ -49,7 +101,7 @@
         .overlay {
             position: absolute;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.65);
             color: #fff;
             width: 100%;
             padding: 10px;
@@ -71,22 +123,36 @@
         .overlay p {
             margin: 0;
         }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #555;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Sección Blog -->
-    <h1>Blog de Mister Phillips</h1>
-    {% for publicacion in publicaciones %}
-        <div>
-            <h2>{{ publicacion.titulo }}</h2>
-            <p>Publicado: {{ publicacion.fecha_publicacion }}</p>
-            <p>{{ publicacion.texto|linebreaksbr }}</p>
-            <hr>
-        </div>
-    {% endfor %}
+<header>
+    <h1>Blog y Galería de Arte</h1>
+</header>
 
-    <!-- Sección Galería de Arte -->
+<div class="contenido">
+
+    <!-- BLOG -->
+    <div class="blog-section">
+        <h1>Publicaciones del Blog</h1>
+        {% for publicacion in publicaciones %}
+            <div class="publicacion">
+                <h2>{{ publicacion.titulo }}</h2>
+                <div class="fecha">Publicado: {{ publicacion.fecha_publicacion }}</div>
+                <p>{{ publicacion.texto|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- GALERÍA -->
     <div class="galeria">
         <div class="galeria-title">Galería de Arte</div>
         <div class="galeria-grid">
@@ -106,6 +172,13 @@
             {% endfor %}
         </div>
     </div>
+
+</div>
+
+<footer>
+    Sitio desarrollado por MisterPhillips &copy; 2025
+    <br>
+</footer>
 
 </body>
 </html>
